@@ -1,0 +1,11 @@
+# Pre-commit checks for every staged shell script (convert-to-vp9.sh, test.sh,
+# option-matrix.sh): syntax + static analysis. The encode tests are too slow
+# for a hook — they run in GitLab CI (.gitlab-ci.yml).
+pre-commit:
+  commands:
+    syntax-check:
+      glob: "*.sh"
+      run: bash -n {staged_files}
+    shellcheck:
+      glob: "*.sh"
+      run: shellcheck {staged_files}
